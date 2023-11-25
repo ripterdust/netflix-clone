@@ -28,12 +28,12 @@ let AuthGuard = class AuthGuard {
             return true;
         }
         const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request);
+        const token = this.extractTokenFromHeader(request.headers);
         if (!token) {
             throw new common_1.UnauthorizedException();
         }
         try {
-            const payload = await this.jwtService.verifyAsync(request.headers);
+            const payload = await this.jwtService.verifyAsync(token);
             request['user'] = payload;
         }
         catch (err) {
