@@ -10,6 +10,18 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const config_1 = require("../config");
+const { database } = config_1.config;
+const databaseSettings = {
+    host: database.host,
+    type: database.type,
+    username: database.user,
+    password: database.password,
+    database: database.database,
+    synchronize: true,
+    entities: [],
+};
+console.log('🚀 ~ file: app.module.ts:18 ~ databaseSettings:', databaseSettings);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;

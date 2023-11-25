@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { config } from 'config';
+
+const { database } = config;
 
 const databaseSettings: TypeOrmModuleOptions = {
   host: database.host,
@@ -10,8 +13,12 @@ const databaseSettings: TypeOrmModuleOptions = {
   password: database.password,
   database: database.database,
   synchronize: true,
-  entities: [User],
+  entities: [],
 };
+console.log(
+  '🚀 ~ file: app.module.ts:18 ~ databaseSettings:',
+  databaseSettings,
+);
 
 @Module({
   imports: [],
