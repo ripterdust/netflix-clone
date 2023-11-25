@@ -36,6 +36,7 @@ export class AuthController {
       email: String(body.email),
       password: String(body.password),
     });
+
     return handleResponse(token);
   }
 }
