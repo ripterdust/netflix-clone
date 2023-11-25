@@ -6,3 +6,7 @@ node_modules
 apps/api/uploads
 
 apps/api/dist
+
+.vscode
+
+.turbo
