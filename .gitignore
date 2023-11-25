@@ -4,3 +4,5 @@ node_modules
 .en
 
 apps/api/uploads
+
+apps/api/dist
