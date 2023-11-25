@@ -16,12 +16,17 @@ exports.ImagesController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
+const path_1 = require("path");
 const os_util_1 = require("../../core/utils/os.util");
 const response_util_1 = require("../../core/utils/response.util");
 let ImagesController = class ImagesController {
     async store(file) {
         const { filename } = file;
         return (0, response_util_1.handleResponse)({ filename });
+    }
+    serveImage(imageName, res) {
+        const imagePath = (0, path_1.join)(__dirname, '../../../../', 'uploads', imageName);
+        return res.sendFile(imagePath);
     }
 };
 exports.ImagesController = ImagesController;
@@ -42,6 +47,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ImagesController.prototype, "store", null);
+__decorate([
+    (0, common_1.Get)(':imageName'),
+    __param(0, (0, common_1.Param)('imageName')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], ImagesController.prototype, "serveImage", null);
 exports.ImagesController = ImagesController = __decorate([
     (0, common_1.Controller)('images')
 ], ImagesController);

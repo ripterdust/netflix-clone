@@ -19,6 +19,8 @@ const auth_guard_1 = require("./core/guards/auth.guard");
 const shows_module_1 = require("./modules/shows/shows.module");
 const shows_entity_1 = require("./modules/shows/shows.entity");
 const images_module_1 = require("./modules/images/images.module");
+const path_1 = require("path");
+const serve_static_1 = require("@nestjs/serve-static");
 const { database } = config_1.config;
 const databaseSettings = {
     host: database.host,
@@ -29,6 +31,7 @@ const databaseSettings = {
     synchronize: true,
     entities: [user_entity_1.User, shows_entity_1.Shows],
 };
+const rootPath = (0, path_1.join)(__dirname, '../../', 'uploads');
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -36,6 +39,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot(databaseSettings),
+            serve_static_1.ServeStaticModule.forRoot({ rootPath, serveRoot: 'image' }),
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             shows_module_1.ShowsModule,

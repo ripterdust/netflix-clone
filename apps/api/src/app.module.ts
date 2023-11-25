@@ -10,6 +10,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ShowsModule } from './modules/shows/shows.module';
 import { Shows } from './modules/shows/shows.entity';
 import { ImagesModule } from './modules/images/images.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 const { database } = config;
 
@@ -23,9 +25,12 @@ const databaseSettings: TypeOrmModuleOptions = {
   entities: [User, Shows],
 };
 
+const rootPath = join(__dirname, '../../', 'uploads');
+
 @Module({
   imports: [
     TypeOrmModule.forRoot(databaseSettings),
+    ServeStaticModule.forRoot({ rootPath, serveRoot: 'image' }),
     AuthModule,
     UsersModule,
     ShowsModule,
