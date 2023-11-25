@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { handleResponse } from 'src/core/utils/response.util';
 import { ShowsService } from './shows.service';
 import { Shows } from './shows.entity';
@@ -24,5 +31,16 @@ export class ShowsController {
 
     const storedShow = await this.showsService.create(show);
     return handleResponse(storedShow);
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: number) {
+    const show = await this.showsService.getById(id);
+
+    if (!show) {
+      throw new NotFoundException(`Element with id ${id} not found`);
+    }
+
+    return handleResponse(show);
   }
 }

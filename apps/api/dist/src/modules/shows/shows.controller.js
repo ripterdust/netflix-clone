@@ -31,6 +31,13 @@ let ShowsController = class ShowsController {
         const storedShow = await this.showsService.create(show);
         return (0, response_util_1.handleResponse)(storedShow);
     }
+    async findById(id) {
+        const show = await this.showsService.getById(id);
+        if (!show) {
+            throw new common_1.NotFoundException(`Element with id ${id} not found`);
+        }
+        return (0, response_util_1.handleResponse)(show);
+    }
 };
 exports.ShowsController = ShowsController;
 __decorate([
@@ -46,6 +53,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ShowsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ShowsController.prototype, "findById", null);
 exports.ShowsController = ShowsController = __decorate([
     (0, common_1.Controller)('shows'),
     __metadata("design:paramtypes", [shows_service_1.ShowsService])

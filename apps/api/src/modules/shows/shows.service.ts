@@ -26,4 +26,12 @@ export class ShowsService {
 
     return await this.showsRepository.save(createdShow);
   }
+
+  async getById(id: number) {
+    return await this.showsRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }

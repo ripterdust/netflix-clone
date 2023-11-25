@@ -5,4 +5,5 @@ export declare class ShowsService {
     constructor(showsRepository: Repository<Shows>);
     getAll(): Promise<Shows[]>;
     create(show: Shows): Promise<Shows>;
+    getById(id: number): Promise<Shows>;
 }

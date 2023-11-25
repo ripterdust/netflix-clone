@@ -10,4 +10,8 @@ export declare class ShowsController {
         data: any;
         statusCode: number;
     }>;
+    findById(id: number): Promise<{
+        data: any;
+        statusCode: number;
+    }>;
 }

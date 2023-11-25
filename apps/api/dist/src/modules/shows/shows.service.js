@@ -33,6 +33,13 @@ let ShowsService = class ShowsService {
         }
         return await this.showsRepository.save(createdShow);
     }
+    async getById(id) {
+        return await this.showsRepository.findOne({
+            where: {
+                id,
+            },
+        });
+    }
 };
 exports.ShowsService = ShowsService;
 exports.ShowsService = ShowsService = __decorate([
