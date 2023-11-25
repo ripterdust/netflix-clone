@@ -30,6 +30,9 @@ export class Shows {
   })
   releaseDate?: Date;
 
+  @Column({ default: '' })
+  coverImage?: string;
+
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt?: Date;
 

@@ -30,6 +30,7 @@ let ShowsController = class ShowsController {
             description: String(body.description),
             releaseDate: new Date(body.releaseDate),
             categories: Number(body.categories),
+            coverImage: String(body.coverImage),
         };
         const storedShow = await this.showsService.create(show);
         return (0, response_util_1.handleResponse)(storedShow);

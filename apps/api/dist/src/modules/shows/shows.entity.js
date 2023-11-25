@@ -43,6 +43,10 @@ __decorate([
     __metadata("design:type", Date)
 ], Shows.prototype, "releaseDate", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ default: '' }),
+    __metadata("design:type", String)
+], Shows.prototype, "coverImage", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
 ], Shows.prototype, "createdAt", void 0);
