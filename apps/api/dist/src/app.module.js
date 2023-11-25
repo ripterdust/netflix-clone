@@ -10,7 +10,10 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("../config");
+const users_module_1 = require("./modules/users/users.module");
+const user_entity_1 = require("./modules/users/user.entity");
 const { database } = config_1.config;
 const databaseSettings = {
     host: database.host,
@@ -19,15 +22,14 @@ const databaseSettings = {
     password: database.password,
     database: database.database,
     synchronize: true,
-    entities: [],
+    entities: [user_entity_1.User],
 };
-console.log('🚀 ~ file: app.module.ts:18 ~ databaseSettings:', databaseSettings);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [typeorm_1.TypeOrmModule.forRoot(databaseSettings), users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
