@@ -5,6 +5,8 @@ import { Response } from './interfaces/response.interface';
 export class CoreService<T> {
   baseUrl: string = '/api';
   moduleName: string = 'moduleName';
+  private token: string | null = localStorage.getItem('token');
+
   constructor(protected http: HttpClient) {}
 
   protected getUrl(): string {
@@ -12,10 +14,15 @@ export class CoreService<T> {
   }
 
   loadPage(page: number): Observable<T[]> {
-    return this.http.get<Response<T>>(this.getUrl(), { params: { page } }).pipe(
-      map((response: Response<T>) => {
-        return response.data;
-      }),
-    );
+    return this.http
+      .get<Response<T>>(this.getUrl(), {
+        params: { page },
+        headers: { Authorization: `Bearer ${this.token}` },
+      })
+      .pipe(
+        map((response: Response<T>) => {
+          return response.data;
+        }),
+      );
   }
 }
