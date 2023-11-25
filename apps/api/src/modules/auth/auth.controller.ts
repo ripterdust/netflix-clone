@@ -3,11 +3,13 @@ import { AuthService } from './auth.service';
 import { User } from '../users/user.entity';
 import { hash } from 'bcrypt';
 import { handleResponse } from 'src/core/utils/response.util';
+import { Public } from 'src/core/guards/public.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post('register')
   async register(@Body() body: Record<string, any>) {
     if (!body.password) {
