@@ -14,6 +14,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("../config");
 const users_module_1 = require("./modules/users/users.module");
 const user_entity_1 = require("./modules/users/user.entity");
+const auth_module_1 = require("./modules/auth/auth.module");
 const { database } = config_1.config;
 const databaseSettings = {
     host: database.host,
@@ -29,7 +30,7 @@ let AppModule = class AppModule {
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forRoot(databaseSettings), users_module_1.UsersModule],
+        imports: [typeorm_1.TypeOrmModule.forRoot(databaseSettings), auth_module_1.AuthModule, users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

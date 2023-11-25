@@ -5,6 +5,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { config } from 'config';
 import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/user.entity';
+import { AuthModule } from './modules/auth/auth.module';
 
 const { database } = config;
 
@@ -19,7 +20,7 @@ const databaseSettings: TypeOrmModuleOptions = {
 };
 
 @Module({
-  imports: [TypeOrmModule.forRoot(databaseSettings), UsersModule],
+  imports: [TypeOrmModule.forRoot(databaseSettings), AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })

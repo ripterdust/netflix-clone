@@ -17,12 +17,21 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
+const class_validator_1 = require("class-validator");
 let UsersService = class UsersService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
     async findAll() {
         return this.userRepository.find();
+    }
+    async create(user) {
+        const createdUser = this.userRepository.create(user);
+        const errors = await (0, class_validator_1.validate)(createdUser);
+        if (errors.length > 0) {
+            throw new common_1.UnauthorizedException(errors);
+        }
+        return await this.userRepository.save(createdUser);
     }
 };
 exports.UsersService = UsersService;

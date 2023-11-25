@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
 let User = class User {
 };
@@ -18,6 +19,29 @@ __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNotEmpty)({
+        message: 'username_is_required',
+    }),
+    __metadata("design:type", String)
+], User.prototype, "username", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ unique: true }),
+    (0, class_validator_1.IsNotEmpty)({
+        message: 'email_is_required',
+    }),
+    (0, class_validator_1.IsEmail)({}, { message: 'field_email_must_be_an_email' }),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
+import { validate } from 'class-validator';
 
 @Injectable()
 export class UsersService {
@@ -11,5 +12,17 @@ export class UsersService {
   ) {}
   async findAll() {
     return this.userRepository.find();
+  }
+
+  async create(user: User) {
+    const createdUser = this.userRepository.create(user);
+
+    const errors = await validate(createdUser);
+
+    if (errors.length > 0) {
+      throw new UnauthorizedException(errors);
+    }
+
+    return await this.userRepository.save(createdUser);
   }
 }
