@@ -19,6 +19,17 @@ export class Shows {
   @Column({ default: 0 })
   type?: number;
 
+  @Column({ default: 0 })
+  categories?: number;
+
+  @Column({ default: '' })
+  description?: string;
+
+  @Column({
+    default: new Date(),
+  })
+  releaseDate?: Date;
+
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt?: Date;
 

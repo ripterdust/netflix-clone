@@ -27,6 +27,9 @@ export class ShowsController {
   ) {
     const show: Shows = {
       name: String(body.name),
+      description: String(body.description),
+      releaseDate: new Date(body.releaseDate),
+      categories: Number(body.categories),
     };
 
     const storedShow = await this.showsService.create(show);

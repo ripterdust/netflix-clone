@@ -29,6 +29,20 @@ __decorate([
     __metadata("design:type", Number)
 ], Shows.prototype, "type", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    __metadata("design:type", Number)
+], Shows.prototype, "categories", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: '' }),
+    __metadata("design:type", String)
+], Shows.prototype, "description", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        default: new Date(),
+    }),
+    __metadata("design:type", Date)
+], Shows.prototype, "releaseDate", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
 ], Shows.prototype, "createdAt", void 0);
