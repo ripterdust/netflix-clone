@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   }
 
   private getShows(currentPage: number) {
-    this.showsService.loadPage(currentPage);
+    this.showsService.loadPage(currentPage).subscribe((shows: Show[]) => {
+      this.shows.update(() => [...shows]);
+    });
   }
 }

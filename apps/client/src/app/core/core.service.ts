@@ -1,14 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Response } from './interfaces/response.interface';
 
-export class coreService {
-  token: string = localStorage.getItem('token') || '';
-  baseUrl: string = '';
-
+export class CoreService<T> {
+  baseUrl: string = '/api';
+  moduleName: string = 'moduleName';
   constructor(protected http: HttpClient) {}
-  loadPage(page: number) {
-    return this.http
-      .get(this.baseUrl, { params: { page } })
-      .pipe(map((response) => response));
+
+  protected getUrl(): string {
+    return `${this.baseUrl}/${this.moduleName}`;
+  }
+
+  loadPage(page: number): Observable<T[]> {
+    return this.http.get<Response<T>>(this.getUrl(), { params: { page } }).pipe(
+      map((response: Response<T>) => {
+        return response.data;
+      }),
+    );
   }
 }

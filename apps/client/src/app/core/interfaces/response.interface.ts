@@ -1,4 +1,4 @@
-export interface Response {
-  data: unknown[];
+export interface Response<T> {
+  data: T[];
   statusCode: number;
 }
