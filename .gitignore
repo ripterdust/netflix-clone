@@ -10,3 +10,5 @@ apps/api/dist
 .vscode
 
 .turbo
+
+app/api/client/.angular/cache
