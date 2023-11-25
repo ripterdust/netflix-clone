@@ -16,21 +16,25 @@ exports.ShowsController = void 0;
 const common_1 = require("@nestjs/common");
 const response_util_1 = require("../../core/utils/response.util");
 const shows_service_1 = require("./shows.service");
+const images_service_1 = require("../images/images.service");
 let ShowsController = class ShowsController {
-    constructor(showsService) {
+    constructor(showsService, imageService) {
         this.showsService = showsService;
+        this.imageService = imageService;
     }
     async find() {
         const shows = await this.showsService.getAll();
         return (0, response_util_1.handleResponse)(shows);
     }
     async create(body) {
+        const coverImage = String(body.cover);
+        this.imageService.moveFileFromTempToBlobs(coverImage);
         const show = {
             name: String(body.name),
             description: String(body.description),
             releaseDate: new Date(body.releaseDate),
             categories: Number(body.categories),
-            coverImage: String(body.coverImage),
+            coverImage,
         };
         const storedShow = await this.showsService.create(show);
         return (0, response_util_1.handleResponse)(storedShow);
@@ -66,6 +70,7 @@ __decorate([
 ], ShowsController.prototype, "findById", null);
 exports.ShowsController = ShowsController = __decorate([
     (0, common_1.Controller)('shows'),
-    __metadata("design:paramtypes", [shows_service_1.ShowsService])
+    __metadata("design:paramtypes", [shows_service_1.ShowsService,
+        images_service_1.ImagesService])
 ], ShowsController);
 //# sourceMappingURL=shows.controller.js.map

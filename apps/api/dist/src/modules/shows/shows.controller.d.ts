@@ -1,7 +1,9 @@
 import { ShowsService } from './shows.service';
+import { ImagesService } from '../images/images.service';
 export declare class ShowsController {
     private showsService;
-    constructor(showsService: ShowsService);
+    private imageService;
+    constructor(showsService: ShowsService, imageService: ImagesService);
     find(): Promise<{
         data: any;
         statusCode: number;

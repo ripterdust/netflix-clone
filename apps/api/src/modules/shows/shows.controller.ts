@@ -9,10 +9,14 @@ import {
 import { handleResponse } from 'src/core/utils/response.util';
 import { ShowsService } from './shows.service';
 import { Shows } from './shows.entity';
+import { ImagesService } from '../images/images.service';
 
 @Controller('shows')
 export class ShowsController {
-  constructor(private showsService: ShowsService) {}
+  constructor(
+    private showsService: ShowsService,
+    private imageService: ImagesService,
+  ) {}
 
   @Get('')
   async find() {
@@ -25,15 +29,18 @@ export class ShowsController {
     @Body()
     body: Record<string, any>,
   ) {
+    const coverImage = String(body.cover);
+    this.imageService.moveFileFromTempToBlobs(coverImage);
+
     const show: Shows = {
       name: String(body.name),
       description: String(body.description),
       releaseDate: new Date(body.releaseDate),
       categories: Number(body.categories),
-      coverImage: String(body.coverImage),
+      coverImage,
     };
-
     const storedShow = await this.showsService.create(show);
+
     return handleResponse(storedShow);
   }
 
