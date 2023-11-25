@@ -10,6 +10,7 @@ import { handleResponse } from 'src/core/utils/response.util';
 import { ShowsService } from './shows.service';
 import { Shows } from './shows.entity';
 import { ImagesService } from '../images/images.service';
+import { Public } from 'src/core/guards/public.guard';
 
 @Controller('shows')
 export class ShowsController {
@@ -18,6 +19,7 @@ export class ShowsController {
     private imageService: ImagesService,
   ) {}
 
+  @Public()
   @Get('')
   async find() {
     const shows = await this.showsService.getAll();
