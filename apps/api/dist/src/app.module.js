@@ -17,6 +17,7 @@ const auth_module_1 = require("./modules/auth/auth.module");
 const core_1 = require("@nestjs/core");
 const auth_guard_1 = require("./core/guards/auth.guard");
 const shows_module_1 = require("./modules/shows/shows.module");
+const shows_entity_1 = require("./modules/shows/shows.entity");
 const { database } = config_1.config;
 const databaseSettings = {
     host: database.host,
@@ -25,7 +26,7 @@ const databaseSettings = {
     password: database.password,
     database: database.database,
     synchronize: true,
-    entities: [user_entity_1.User],
+    entities: [user_entity_1.User, shows_entity_1.Shows],
 };
 let AppModule = class AppModule {
 };

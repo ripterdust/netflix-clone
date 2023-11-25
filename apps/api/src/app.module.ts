@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ShowsModule } from './modules/shows/shows.module';
+import { Shows } from './modules/shows/shows.entity';
 
 const { database } = config;
 
@@ -18,7 +19,7 @@ const databaseSettings: TypeOrmModuleOptions = {
   password: database.password,
   database: database.database,
   synchronize: true,
-  entities: [User],
+  entities: [User, Shows],
 };
 
 @Module({
