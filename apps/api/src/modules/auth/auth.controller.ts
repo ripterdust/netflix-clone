@@ -28,4 +28,14 @@ export class AuthController {
 
     return handleResponse(token);
   }
+
+  @Public()
+  @Post('login')
+  async login(@Body() body: Record<string, any>) {
+    const token = await this.authService.login({
+      email: String(body.email),
+      password: String(body.password),
+    });
+    return handleResponse(token);
+  }
 }

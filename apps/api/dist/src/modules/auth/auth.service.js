@@ -13,6 +13,7 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
+const bcrypt_1 = require("bcrypt");
 let AuthService = class AuthService {
     constructor(usersService, jwtService) {
         this.usersService = usersService;
@@ -24,6 +25,23 @@ let AuthService = class AuthService {
             id: userQuery.id,
             username: user.username,
             email: user.email,
+        };
+        const token = await this.jwtService.signAsync(payload);
+        return token;
+    }
+    async login({ email, password }) {
+        const userQuery = await this.usersService.findByEmail(email);
+        if (!userQuery) {
+            throw new common_1.UnauthorizedException();
+        }
+        const passwordMatch = await (0, bcrypt_1.compare)(password, userQuery?.password);
+        if (!passwordMatch) {
+            throw new common_1.UnauthorizedException();
+        }
+        const payload = {
+            id: userQuery.id,
+            username: userQuery.username,
+            email: userQuery.email,
         };
         const token = await this.jwtService.signAsync(payload);
         return token;

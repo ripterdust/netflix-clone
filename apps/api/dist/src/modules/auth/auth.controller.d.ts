@@ -6,4 +6,8 @@ export declare class AuthController {
         data: any;
         statusCode: number;
     }>;
+    login(body: Record<string, any>): Promise<{
+        data: any;
+        statusCode: number;
+    }>;
 }

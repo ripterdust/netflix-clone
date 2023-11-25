@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { validate } from 'class-validator';
 
@@ -24,5 +24,11 @@ export class UsersService {
     }
 
     return await this.userRepository.save(createdUser);
+  }
+
+  async findByEmail(email: string) {
+    const options: FindOneOptions = { where: { email } };
+
+    return this.userRepository.findOne(options);
   }
 }

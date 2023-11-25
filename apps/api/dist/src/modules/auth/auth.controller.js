@@ -36,6 +36,13 @@ let AuthController = class AuthController {
         const token = await this.authService.register(user);
         return (0, response_util_1.handleResponse)(token);
     }
+    async login(body) {
+        const token = await this.authService.login({
+            email: String(body.email),
+            password: String(body.password),
+        });
+        return (0, response_util_1.handleResponse)(token);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -46,6 +53,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
+__decorate([
+    (0, public_guard_1.Public)(),
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "login", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

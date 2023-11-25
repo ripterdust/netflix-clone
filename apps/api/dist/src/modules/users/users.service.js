@@ -33,6 +33,10 @@ let UsersService = class UsersService {
         }
         return await this.userRepository.save(createdUser);
     }
+    async findByEmail(email) {
+        const options = { where: { email } };
+        return this.userRepository.findOne(options);
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
