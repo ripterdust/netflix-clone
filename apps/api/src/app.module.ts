@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { config } from 'config';
 import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/user.entity';
 import { AuthModule } from './modules/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const { database } = config;
 
@@ -22,6 +23,11 @@ const databaseSettings: TypeOrmModuleOptions = {
 @Module({
   imports: [TypeOrmModule.forRoot(databaseSettings), AuthModule, UsersModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

@@ -9,12 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("../config");
 const users_module_1 = require("./modules/users/users.module");
 const user_entity_1 = require("./modules/users/user.entity");
 const auth_module_1 = require("./modules/auth/auth.module");
+const core_1 = require("@nestjs/core");
+const auth_guard_1 = require("./core/guards/auth.guard");
 const { database } = config_1.config;
 const databaseSettings = {
     host: database.host,
@@ -32,7 +33,12 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forRoot(databaseSettings), auth_module_1.AuthModule, users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [
+            {
+                provide: core_1.APP_GUARD,
+                useClass: auth_guard_1.AuthGuard,
+            },
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
