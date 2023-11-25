@@ -18,6 +18,7 @@ const core_1 = require("@nestjs/core");
 const auth_guard_1 = require("./core/guards/auth.guard");
 const shows_module_1 = require("./modules/shows/shows.module");
 const shows_entity_1 = require("./modules/shows/shows.entity");
+const images_module_1 = require("./modules/images/images.module");
 const { database } = config_1.config;
 const databaseSettings = {
     host: database.host,
@@ -38,6 +39,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             shows_module_1.ShowsModule,
+            images_module_1.ImagesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [

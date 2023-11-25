@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ShowsModule } from './modules/shows/shows.module';
 import { Shows } from './modules/shows/shows.entity';
+import { ImagesModule } from './modules/images/images.module';
 
 const { database } = config;
 
@@ -28,6 +29,7 @@ const databaseSettings: TypeOrmModuleOptions = {
     AuthModule,
     UsersModule,
     ShowsModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [
