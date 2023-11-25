@@ -6,4 +6,8 @@ export declare class ShowsController {
         data: any;
         statusCode: number;
     }>;
+    create(body: Record<string, any>): Promise<{
+        data: any;
+        statusCode: number;
+    }>;
 }

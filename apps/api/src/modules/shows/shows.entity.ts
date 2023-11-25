@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -12,10 +13,11 @@ export class Shows {
   id?: number;
 
   @Column()
+  @IsNotEmpty()
   name: string;
 
-  @Column()
-  type: number;
+  @Column({ default: 0 })
+  type?: number;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt?: Date;
