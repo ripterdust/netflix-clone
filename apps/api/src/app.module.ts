@@ -12,6 +12,8 @@ import { Shows } from './modules/shows/shows.entity';
 import { ImagesModule } from './modules/images/images.module';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { Category } from './modules/categories/category.entity';
 
 const { database } = config;
 
@@ -22,7 +24,7 @@ const databaseSettings: TypeOrmModuleOptions = {
   password: database.password,
   database: database.database,
   synchronize: true,
-  entities: [User, Shows],
+  entities: [User, Shows, Category],
 };
 
 const rootPath = join(__dirname, '../../', 'uploads');
@@ -35,6 +37,7 @@ const rootPath = join(__dirname, '../../', 'uploads');
     UsersModule,
     ShowsModule,
     ImagesModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [
