@@ -16,13 +16,8 @@ export class UsersService extends CoreService<any> {
   login(user: Login) {
     return this.http
       .post(`${this.getUrl()}/login`, {
-        headers: {
-          Accept: 'application/json',
-        },
-        body: {
-          email: user.email,
-          password: user.password,
-        },
+        email: user.email,
+        password: user.password,
       })
       .pipe(
         map((response) => {

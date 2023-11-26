@@ -32,6 +32,10 @@ export class AuthController {
   @Public()
   @Post('login')
   async login(@Body() body: Record<string, any>) {
+    console.log(
+      '🚀 ~ file: auth.controller.ts:35 ~ AuthController ~ login ~ body:',
+      body,
+    );
     const token = await this.authService.login({
       email: String(body.email),
       password: String(body.password),

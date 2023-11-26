@@ -9,6 +9,7 @@ import {
 import { UsersService } from '../../../services/user.service';
 import { Login } from '../../../core/interfaces/user.interface';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class LoginComponent {
   contactForm: any;
-
   userService = inject(UsersService);
+  router = inject(Router);
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -33,6 +34,14 @@ export class LoginComponent {
       password: this.loginForm.get('password')?.value || '',
     };
     const observable = await this.userService.login(user);
-    const response = firstValueFrom(observable);
+    const { data }: any = await firstValueFrom(observable);
+
+    if (!data) {
+      return;
+    }
+
+    localStorage.setItem('token', data);
+
+    this.router.navigate(['/']);
   }
 }
