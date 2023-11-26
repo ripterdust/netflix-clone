@@ -8,34 +8,42 @@ import {
   Post,
 } from '@nestjs/common';
 import { BaseService } from './base.service';
+import { handleResponse } from '../utils/response.util';
 
 export abstract class BaseController<T> {
   abstract getService(): BaseService<T>;
 
   @Get()
-  async findAll(): Promise<T[]> {
-    return await this.getService().findAll();
+  async findAll() {
+    const query = await this.getService().findAll();
+
+    return handleResponse(query);
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<T> {
-    return await this.getService().findOne(id);
+  async findOne(@Param('id') id: number) {
+    const query = await this.getService().findOne(id);
+    return handleResponse(query);
   }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async save(@Body() entity: T) {
-    return await this.getService().save(entity);
+    const query = await this.getService().save(entity);
+    return handleResponse(query);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   async delete(@Param('id') id: number) {
-    return this.getService().delete(id);
+    const query = await this.getService().delete(id);
+
+    return handleResponse(query);
   }
 
   @Get('count')
-  async count(): Promise<number> {
-    return await this.getService().count();
+  async count() {
+    const query = await this.getService().count();
+    return handleResponse(query);
   }
 }
