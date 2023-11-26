@@ -18,7 +18,7 @@ import { CardModule } from 'primeng/card';
     CardModule,
   ],
   template: '<router-outlet/>',
-  styleUrls: ['./app.component.css'],
+  styleUrls: [],
 })
 export class AppComponent {
   title = 'client';
