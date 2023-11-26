@@ -5,6 +5,7 @@ import { AuthSkeleton } from './core/skeletons/auth/auth.skeleton.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { authGuard } from './guards/auth.guard';
 import { unauthorizedGuard } from './guards/unauthorized.guard';
+import { SkeletonComponent } from './core/skeletons/base/skeleton.component';
 
 export const routes: Routes = [
   {
@@ -21,7 +22,8 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent,
+    component: SkeletonComponent,
     canActivate: [authGuard],
+    children: [{ path: '', component: HomeComponent }],
   },
 ];

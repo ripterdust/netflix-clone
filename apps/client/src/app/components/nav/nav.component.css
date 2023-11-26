@@ -1,0 +1,24 @@
+/* navbar.component.css */
+.navbar {
+  background: linear-gradient(to bottom, #0b0b0b, #141414);
+  color: white;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: top 0.3s;
+  z-index: 1000;
+}
+
+.navbar .brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-hidden {
+  top: -100px;
+}
+
+.navbar_title {
+  color: #e50914;
+}
