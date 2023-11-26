@@ -11,11 +11,20 @@ import { Login } from '../../../core/interfaces/user.interface';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { MessagesModule } from 'primeng/messages';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    PasswordModule,
+    MessagesModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
