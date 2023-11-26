@@ -3,9 +3,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthSkeleton } from './core/skeletons/auth/auth.skeleton.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { component: HomeComponent, path: '' },
   {
     path: 'auth',
     component: AuthSkeleton,
@@ -16,5 +16,10 @@ export const routes: Routes = [
         component: RegisterComponent,
       },
     ],
+  },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [authGuard],
   },
 ];
