@@ -5,7 +5,7 @@ import { Response } from './interfaces/response.interface';
 export class CoreService<T> {
   baseUrl: string = '/api';
   moduleName: string = 'moduleName';
-  private token: string | null = localStorage.getItem('token');
+  token: string | null = localStorage.getItem('token');
 
   constructor(protected http: HttpClient) {}
 

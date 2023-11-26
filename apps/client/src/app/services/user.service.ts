@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreService } from '../core/core.service';
 import { HttpClient } from '@angular/common/http';
+import { Login } from '../core/interfaces/user.interface';
+import { map } from 'rxjs';
+import { Response } from '../core/interfaces/response.interface';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService extends CoreService<any> {
@@ -8,5 +11,23 @@ export class UsersService extends CoreService<any> {
 
   constructor(http: HttpClient) {
     super(http);
+  }
+
+  login(user: Login) {
+    return this.http
+      .post(`${this.getUrl()}/login`, {
+        headers: {
+          Accept: 'application/json',
+        },
+        body: {
+          email: user.email,
+          password: user.password,
+        },
+      })
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+      );
   }
 }
