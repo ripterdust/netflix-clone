@@ -1,12 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { MenubarModule } from 'primeng/menubar';
 
 @Component({
   standalone: true,
   templateUrl: './nav.component.html',
   selector: 'app-nav',
   styleUrl: './nav.component.css',
-  imports: [NgClass],
+  imports: [NgClass, MenubarModule],
 })
 export class NavComponent {
   isNavbarHidden = false;
